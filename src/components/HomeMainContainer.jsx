@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import HomeForm from "./HomeForm.jsx";
 
 const HomeMainContainer = () => {
+    const [showModal, setShowModal] = useState(false);
+
     function saveEmployee() {
         const firstName = document.getElementById('first-name');
         const lastName = document.getElementById('last-name');
@@ -27,7 +29,12 @@ const HomeMainContainer = () => {
         };
         employees.push(employee);
         localStorage.setItem('employees', JSON.stringify(employees));
-        $('#confirmation').modal();
+
+        setShowModal(true);
+    }
+
+    function closeModal() {
+        setShowModal(false);
     }
 
     return (
@@ -38,9 +45,17 @@ const HomeMainContainer = () => {
                 <HomeForm />
                 <button onClick={saveEmployee}>Save</button>
             </div>
-            <div id="confirmation" className="modal">Employee Created!</div>
+
+            {showModal && (
+                <div className="modal" style={{ display: 'flex' }}>
+                    <div className="modal-content">
+                        <span className="close" onClick={closeModal}>&times;</span>
+                        <p>Employee Created!</p>
+                    </div>
+                </div>
+            )}
         </div>
-    )
+    );
 }
 
 export default HomeMainContainer;
