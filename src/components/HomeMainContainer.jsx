@@ -3,24 +3,26 @@ import HomeForm from "./HomeForm.jsx";
 
 const HomeMainContainer = () => {
     const [showModal, setShowModal] = useState(false);
+    const [dateOfBirth, setDateOfBirth] = useState();
+    const [startDate, setStartDate] = useState();
+    const [department, setDepartment] = useState();
+    const [state, setState] = useState();
 
     function saveEmployee() {
+        const firstName = document.getElementById('first-name').value;
+        const lastName = document.getElementById('last-name').value;
+        const street = document.getElementById('street').value;
+        const city = document.getElementById('city').value;
+        const zipCode = document.getElementById('zip-code').value;
 
-        const firstName = document.getElementById('first-name')?.value || '';
-        const lastName = document.getElementById('last-name')?.value || '';
-        const dateOfBirth = document.getElementById('date-of-birth')?.value || '';
-        const startDate = document.getElementById('start-date')?.value || '';
-        const department = document.getElementById('department')?.value || '';
-        const street = document.getElementById('street')?.value || '';
-        const city = document.getElementById('city')?.value || '';
-        const state = document.getElementById('state')?.value || '';
-        const zipCode = document.getElementById('zip-code')?.value || '';
+        const formattedDateOfBirth = dateOfBirth ? dateOfBirth.toLocaleDateString() : '';
+        const formattedStartDate = startDate ? startDate.toLocaleDateString() : '';
 
         const employee = {
             firstName,
             lastName,
-            dateOfBirth,
-            startDate,
+            dateOfBirth: formattedDateOfBirth,
+            startDate: formattedStartDate,
             department,
             street,
             city,
@@ -44,7 +46,12 @@ const HomeMainContainer = () => {
             <div className="container">
                 <a href="/list">View Current Employees</a>
                 <h2>Create Employee</h2>
-                <HomeForm />
+                <HomeForm
+                    onDateOfBirthSelect={setDateOfBirth}
+                    onStartDateSelect={setStartDate}
+                    onDepartmentChange={setDepartment}
+                    onStateChange={setState}
+                />
                 <button onClick={saveEmployee}>Save</button>
             </div>
 
