@@ -1,17 +1,13 @@
 import { useState, useEffect, useMemo, useRef } from "react";
 import { AgGridReact } from "ag-grid-react";
 import { ModuleRegistry, AllCommunityModule } from "ag-grid-community";
+import useEmployeeStore from "../stores/employeeStore";
 
 ModuleRegistry.registerModules([AllCommunityModule]);
 
 const EmployeeListMainContainer = () => {
   const gridRef = useRef();
-  const [rowData, setRowData] = useState([]);
-
-  useEffect(() => {
-    const employees = JSON.parse(localStorage.getItem("employees")) || [];
-    setRowData(employees);
-  }, []);
+  const employees = useEmployeeStore((state) => state.employees);
 
   const onGridReady = (params) => {
     params.api.sizeColumnsToFit();
@@ -68,7 +64,7 @@ const EmployeeListMainContainer = () => {
       <div style={{ height: "600px", width: "100%" }}>
         <AgGridReact
           ref={gridRef}
-          rowData={rowData}
+          rowData={employees}
           columnDefs={columnDefs}
           defaultColDef={defaultColDef}
           animateRows={true}
