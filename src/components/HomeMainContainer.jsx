@@ -1,5 +1,6 @@
 import { useState } from "react";
 import HomeForm from "./HomeForm.jsx";
+import useEmployeeStore from "../stores/employeeStore";
 
 const HomeMainContainer = () => {
   const [showModal, setShowModal] = useState(false);
@@ -7,6 +8,7 @@ const HomeMainContainer = () => {
   const [startDate, setStartDate] = useState();
   const [department, setDepartment] = useState();
   const [state, setState] = useState();
+  const addEmployee = useEmployeeStore((state) => state.addEmployee);
 
   function saveEmployee() {
     const firstName = document.getElementById("first-name").value;
@@ -14,7 +16,6 @@ const HomeMainContainer = () => {
     const street = document.getElementById("street").value;
     const city = document.getElementById("city").value;
     const zipCode = document.getElementById("zip-code").value;
-
     const formattedDateOfBirth = dateOfBirth
       ? dateOfBirth.toLocaleDateString()
       : "";
@@ -32,10 +33,7 @@ const HomeMainContainer = () => {
       zipCode,
     };
 
-    const employees = JSON.parse(localStorage.getItem("employees")) || [];
-    employees.push(employee);
-    localStorage.setItem("employees", JSON.stringify(employees));
-
+    addEmployee(employee);
     setShowModal(true);
   }
 
@@ -56,7 +54,6 @@ const HomeMainContainer = () => {
         />
         <button onClick={saveEmployee}>Save</button>
       </div>
-
       {showModal && (
         <div
           className="modal"
