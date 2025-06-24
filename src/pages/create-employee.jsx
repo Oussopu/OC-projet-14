@@ -1,14 +1,13 @@
-import React from 'react';
-import HomeTitle from '../components/HomeTitle.jsx';
+import HomeTitle from "../components/HomeTitle.jsx";
 import HomeMainContainer from "../components/HomeMainContainer.jsx";
 
 const CreateEmployee = () => {
-    return (
-        <div>
-            <HomeTitle />
-            <HomeMainContainer />
-        </div>
-    );
+  return (
+    <div>
+      <HomeTitle />
+      <HomeMainContainer />
+    </div>
+  );
 };
 
 export default CreateEmployee;
