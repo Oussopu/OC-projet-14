@@ -1,6 +1,7 @@
 import { useState } from "react";
 import HomeForm from "./HomeForm.jsx";
 import useEmployeeStore from "../stores/employeeStore";
+import Modal from '@oussop/easy-modal/dist';
 
 const HomeMainContainer = () => {
   const [showModal, setShowModal] = useState(false);
@@ -17,8 +18,8 @@ const HomeMainContainer = () => {
     const city = document.getElementById("city").value;
     const zipCode = document.getElementById("zip-code").value;
     const formattedDateOfBirth = dateOfBirth
-      ? dateOfBirth.toLocaleDateString()
-      : "";
+        ? dateOfBirth.toLocaleDateString()
+        : "";
     const formattedStartDate = startDate ? startDate.toLocaleDateString() : "";
 
     const employee = {
@@ -41,62 +42,39 @@ const HomeMainContainer = () => {
     setShowModal(false);
   }
 
+  const modalStyles = {
+    modalContent: {
+      backgroundColor: '#ffffff',
+      padding: '100 400',
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'center',
+      position: 'relative',
+    },
+  };
+
   return (
-    <div>
-      <div className="container">
-        <a href="/list">View Current Employees</a>
-        <h2>Create Employee</h2>
-        <HomeForm
-          onDateOfBirthSelect={setDateOfBirth}
-          onStartDateSelect={setStartDate}
-          onDepartmentChange={setDepartment}
-          onStateChange={setState}
-        />
-        <button onClick={saveEmployee}>Save</button>
-      </div>
-      {showModal && (
-        <div
-          className="modal"
-          style={{
-            display: "block",
-            position: "fixed",
-            zIndex: 1000,
-            left: 0,
-            top: 0,
-            width: "100%",
-            height: "100%",
-            backgroundColor: "rgba(0, 0, 0, 0.5)",
-          }}
-        >
-          <div
-            className="modal-content"
-            style={{
-              backgroundColor: "#fff",
-              margin: "15% auto",
-              padding: "20px",
-              border: "1px solid #888",
-              width: "80%",
-              textAlign: "center",
-            }}
-          >
-            <span
-              className="close"
-              onClick={closeModal}
-              style={{
-                color: "#aaa",
-                float: "right",
-                fontSize: "28px",
-                fontWeight: "bold",
-                cursor: "pointer",
-              }}
-            >
-              &times;
-            </span>
-            <p>Employee Created!</p>
-          </div>
+      <div>
+        <div className="container">
+          <a href="/list">View Current Employees</a>
+          <h2>Create Employee</h2>
+          <HomeForm
+              onDateOfBirthSelect={setDateOfBirth}
+              onStartDateSelect={setStartDate}
+              onDepartmentChange={setDepartment}
+              onStateChange={setState}
+          />
+          <button onClick={saveEmployee}>Save</button>
         </div>
-      )}
-    </div>
+        <Modal
+            isOpen={showModal}
+            onClose={closeModal}
+            style={modalStyles}
+        >
+          <p style={{ textAlign: 'center' }}>Employee Created!</p>
+        </Modal>
+      </div>
   );
 };
 
