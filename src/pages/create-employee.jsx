@@ -1,5 +1,5 @@
-import HomeTitle from "../components/HomeTitle.jsx";
 import HomeMainContainer from "../components/HomeMainContainer.jsx";
+import HomeTitle from "../components/HomeTitle.jsx";
 
 const CreateEmployee = () => {
   return (
