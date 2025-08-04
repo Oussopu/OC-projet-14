@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import CreateEmployee from "./pages/create-employee.jsx";
 import EmployeeList from "./pages/employee-list.jsx";
 

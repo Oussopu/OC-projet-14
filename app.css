@@ -17,6 +17,94 @@ label {
   margin-bottom: 10px;
 }
 
+.rc-select-arrow {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rc-select-selector {
+  height: 100%;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+}
+
+.rc-select-selection-item {
+  padding-left: 10px;
+}
+
 .address {
   margin-top: 10px;
+  width: 170%;
+}
+.ag-root-wrapper {
+  border: none;
+}
+
+.ag-header {
+  background-color: white;
+}
+
+.ag-column-first {
+  display: none;
+}
+
+.ag-theme-params-1 {
+  margin: 0;
+}
+
+.rdp {
+  --rdp-cell-size: 36px;
+  --rdp-accent-color: #3b7ddd;
+  --rdp-background-color: #ffffff;
+  --rdp-border-color: #e0e0e0;
+  --rdp-border-radius: 8px;
+}
+
+.rdp-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+}
+
+.rdp-nav_button {
+  background: none;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  color: #3b7ddd;
+}
+
+.rdp-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.rdp-caption {
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 10px;
+}
+
+.rdp-head_cell {
+  text-align: center;
+  padding: 5px;
+  font-weight: bold;
+}
+
+.rdp-cell {
+  text-align: center;
+  padding: 5px;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  margin: 2px;
+}
+
+.rdp-day_selected {
+  background-color: #3b7ddd;
+  color: white;
 }

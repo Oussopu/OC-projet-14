@@ -1,5 +1,6 @@
-import { useState, useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { DayPicker } from "react-day-picker";
+import "../../app.css";
 import "react-day-picker/style.css";
 
 const DatePickerInput = ({ label, id, onDateSelect }) => {
@@ -19,18 +20,18 @@ const DatePickerInput = ({ label, id, onDateSelect }) => {
     setIsDayPickerVisible(true);
   };
 
-  const handleClickOutside = (event) => {
+  const handleClickOutside = useCallback((event) => {
     if (dayPickerRef.current && !dayPickerRef.current.contains(event.target)) {
       setIsDayPickerVisible(false);
     }
-  };
+  }, []);
 
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, []);
+  }, [handleClickOutside]);
 
   const formatDate = (date) => {
     if (!date) return "";
@@ -57,7 +58,7 @@ const DatePickerInput = ({ label, id, onDateSelect }) => {
             zIndex: 1000,
             backgroundColor: "#ffffff",
             padding: "10px",
-            borderRadius: "5px",
+            borderRadius: "8px",
             boxShadow: "0 2px 10px rgba(0, 0, 0, 0.1)",
           }}
         >

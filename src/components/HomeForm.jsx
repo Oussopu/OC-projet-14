@@ -1,8 +1,9 @@
-import HomeInputForm from "./HomeInputForm";
+import { useId } from "react";
+import DatePickerInput from "./DatePickerInput";
 import HomeFieldSet from "./HomeFieldSet.jsx";
+import HomeInputForm from "./HomeInputForm";
 import HomeSelectForm from "./HomeSelectForm.jsx";
 import HomeSelectFormOption from "./HomeSelectFormOption.jsx";
-import DatePickerInput from "./DatePickerInput";
 
 const HomeForm = ({
   onDateOfBirthSelect,
@@ -10,8 +11,9 @@ const HomeForm = ({
   onDepartmentChange,
   onStateChange,
 }) => {
+  const formId = useId();
   return (
-    <form action="#" id="create-employee">
+    <form action="#" id={formId}>
       <HomeInputForm
         htmlFor={"first-name"}
         type={"text"}
