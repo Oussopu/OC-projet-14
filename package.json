@@ -1,7 +1,10 @@
 {
-  "name": "ton-projet",
+  "name": "HRnet",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "description": "HRnet is an internal web application that manages employee records",
+  "keywords": ["employee management", "dashboard", "easy-modal","ag-grid-react", "ag-grid-community", "rc-select", "react-day-picker"],
+  "author": "Oussop o.haffaf.dev@gmail.com",
   "type": "module",
   "scripts": {
     "dev": "vite",
