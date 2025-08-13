@@ -1,7 +1,8 @@
 import { AllCommunityModule, ModuleRegistry } from "ag-grid-community";
 import { AgGridReact } from "ag-grid-react";
 import { useMemo, useRef, useState } from "react";
-import useEmployeeStore from "../stores/employeeStore";
+import { Link } from "react-router-dom";
+import { useEmployee } from "../context/EmployeeContext";
 import CustomHeaderComponent from "./CustomHeaderComponent.jsx";
 import "../../app.css";
 
@@ -10,7 +11,7 @@ ModuleRegistry.registerModules([AllCommunityModule]);
 const EmployeeListMainContainer = () => {
   const gridRef = useRef();
   const [searchText, setSearchText] = useState("");
-  const employees = useEmployeeStore((state) => state.employees);
+  const { employees } = useEmployee();
 
   const onGridReady = (params) => {
     gridRef.current = params.api;
@@ -99,13 +100,7 @@ const EmployeeListMainContainer = () => {
     },
   ]);
 
-  const defaultColDef = useMemo(
-    () => ({
-      sortable: true,
-      filter: true,
-    }),
-    [],
-  );
+  const defaultColDef = useMemo(() => ({ sortable: true, filter: true }), []);
 
   const getRowStyle = (params) => {
     if (params.node.rowIndex % 2 === 1) {
@@ -162,7 +157,7 @@ const EmployeeListMainContainer = () => {
           paginationPageSizeSelector={[5, 10, 20, 50]}
         />
       </div>
-      <a href="/">Home</a>
+      <Link to="/">Home</Link>
     </div>
   );
 };

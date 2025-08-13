@@ -3,8 +3,16 @@
   "private": true,
   "version": "1.0.0",
   "description": "HRnet is an internal web application that manages employee records",
-  "keywords": ["employee management", "dashboard", "easy-modal","ag-grid-react", "ag-grid-community", "rc-select", "react-day-picker"],
-  "author": "Oussop o.haffaf.dev@gmail.com",
+  "keywords": [
+    "employee management",
+    "dashboard",
+    "easy-modal",
+    "ag-grid-react",
+    "ag-grid-community",
+    "rc-select",
+    "react-day-picker"
+  ],
+  "author": "Oussop <o.haffaf.dev@gmail.com>",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -23,8 +31,7 @@
     "react": "^18.2.0",
     "react-day-picker": "^9.7.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^7.6.2",
-    "zustand": "^5.0.5"
+    "react-router-dom": "^7.6.2"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.0.5",

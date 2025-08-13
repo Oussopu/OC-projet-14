@@ -1,5 +1,5 @@
 import Select, { Option } from "rc-select";
-import { useId, useState } from "react";
+import { useId } from "react";
 import arrowDown from "../assets/img/arrow-down.svg";
 import HomeInputForm from "./HomeInputForm";
 import "rc-select/assets/index.css";
@@ -9,17 +9,25 @@ const DropdownArrow = () => (
   <img src={arrowDown} alt="Arrow Down" width="16" height="16" />
 );
 
-const HomeFieldSet = ({ onStateChange }) => {
-  const [stateValue, setStateValue] = useState(states[0].abbreviation);
+const HomeFieldSet = ({
+  street,
+  setStreet,
+  city,
+  setCity,
+  state,
+  setState,
+  zipCode,
+  setZipCode,
+}) => {
+  const stateId = useId();
+
+  const currentState = state || states[0].abbreviation;
 
   const handleStateChange = (selectedValue) => {
-    setStateValue(selectedValue);
-    if (onStateChange) {
-      onStateChange(selectedValue);
+    if (setState) {
+      setState(selectedValue);
     }
   };
-
-  const stateId = useId();
 
   return (
     <div>
@@ -30,15 +38,19 @@ const HomeFieldSet = ({ onStateChange }) => {
           type={"text"}
           id={"street"}
           label={"Street"}
+          value={street}
+          onChange={(e) => setStreet(e.target.value)}
         />
         <HomeInputForm
           htmlFor={"city"}
           type={"text"}
           id={"city"}
           label={"City"}
+          value={city}
+          onChange={(e) => setCity(e.target.value)}
         />
         <div>
-          <label htmlFor="state">State</label>
+          <label htmlFor={stateId}>State</label>
           <Select
             id={stateId}
             style={{
@@ -47,13 +59,16 @@ const HomeFieldSet = ({ onStateChange }) => {
               backgroundColor: "#f2f2f2",
               fontSize: "18px",
             }}
-            value={stateValue}
+            value={currentState}
             onChange={handleStateChange}
             suffixIcon={<DropdownArrow />}
           >
-            {states.map((state) => (
-              <Option key={state.abbreviation} value={state.abbreviation}>
-                {state.name}
+            {states.map((stateOption) => (
+              <Option
+                key={stateOption.abbreviation}
+                value={stateOption.abbreviation}
+              >
+                {stateOption.name}
               </Option>
             ))}
           </Select>
@@ -63,6 +78,8 @@ const HomeFieldSet = ({ onStateChange }) => {
           type={"number"}
           id={"zip-code"}
           label={"Zip Code"}
+          value={zipCode}
+          onChange={(e) => setZipCode(e.target.value)}
         />
       </fieldset>
     </div>

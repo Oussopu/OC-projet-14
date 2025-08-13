@@ -1,75 +1,14 @@
 import Modal from "@oussop/easy-modal/dist";
 import { useState } from "react";
-import useEmployeeStore from "../stores/employeeStore";
+import { Link } from "react-router-dom";
 import HomeForm from "./HomeForm.jsx";
 
 const HomeMainContainer = () => {
   const [showModal, setShowModal] = useState(false);
-  const [dateOfBirth, setDateOfBirth] = useState();
-  const [startDate, setStartDate] = useState();
-  const [department, setDepartment] = useState("Sales");
-  const [state, setState] = useState();
-  const [error, setError] = useState("");
 
-  const addEmployee = useEmployeeStore((state) => state.addEmployee);
-
-  function validateForm() {
-    const firstName = document.getElementById("first-name").value;
-    const lastName = document.getElementById("last-name").value;
-    const street = document.getElementById("street").value;
-    const city = document.getElementById("city").value;
-    const zipCode = document.getElementById("zip-code").value;
-
-    if (
-      !firstName ||
-      !lastName ||
-      !street ||
-      !city ||
-      !zipCode ||
-      !dateOfBirth ||
-      !startDate ||
-      !department ||
-      !state
-    ) {
-      setError("All fields are required.");
-      return false;
-    }
-
-    setError("");
-    return true;
-  }
-
-  function saveEmployee() {
-    if (!validateForm()) {
-      return;
-    }
-
-    const firstName = document.getElementById("first-name").value;
-    const lastName = document.getElementById("last-name").value;
-    const street = document.getElementById("street").value;
-    const city = document.getElementById("city").value;
-    const zipCode = document.getElementById("zip-code").value;
-
-    const formattedDateOfBirth = dateOfBirth
-      ? dateOfBirth.toLocaleDateString()
-      : "";
-    const formattedStartDate = startDate ? startDate.toLocaleDateString() : "";
-
-    const employee = {
-      firstName,
-      lastName,
-      dateOfBirth: formattedDateOfBirth,
-      startDate: formattedStartDate,
-      department,
-      street,
-      city,
-      state,
-      zipCode,
-    };
-
-    addEmployee(employee);
+  const handleEmployeeCreated = () => {
     setShowModal(true);
-  }
+  };
 
   function closeModal() {
     setShowModal(false);
@@ -95,18 +34,9 @@ const HomeMainContainer = () => {
   return (
     <div>
       <div className="container">
-        <a href="/list">View Current Employees</a>
+        <Link to="/list">View Current Employees</Link>
         <h2>Create Employee</h2>
-        {error && <p style={{ color: "red" }}>{error}</p>}
-        <HomeForm
-          onDateOfBirthSelect={setDateOfBirth}
-          onStartDateSelect={setStartDate}
-          onDepartmentChange={setDepartment}
-          onStateChange={setState}
-        />
-        <button type="button" onClick={saveEmployee}>
-          Save
-        </button>
+        <HomeForm onEmployeeCreated={handleEmployeeCreated} />
       </div>
       <Modal isOpen={showModal} onClose={closeModal} style={modalStyles}>
         <button

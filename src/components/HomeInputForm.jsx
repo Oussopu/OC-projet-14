@@ -1,8 +1,8 @@
-const HomeInputForm = ({ htmlFor, type, id, label }) => {
+const HomeInputForm = ({ htmlFor, type, id, label, value, onChange }) => {
   return (
     <div>
       <label htmlFor={htmlFor}>{label}</label>
-      <input type={type} id={id} />
+      <input type={type} id={id} value={value} onChange={onChange} />
     </div>
   );
 };

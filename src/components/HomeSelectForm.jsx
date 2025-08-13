@@ -1,5 +1,5 @@
 import Select, { Option } from "rc-select";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "rc-select/assets/index.css";
 import arrowDown from "../assets/img/arrow-down.svg";
 
@@ -9,10 +9,17 @@ const DropdownArrow = () => (
 
 const HomeSelectForm = ({ label, id, children, onChange }) => {
   const childrenArray = React.Children.toArray(children);
+
   const firstChildValue =
-    childrenArray.length > 0 ? childrenArray[0].props.SelectOption : null;
+    childrenArray.length > 0 ? childrenArray[0].props.SelectOption : "";
 
   const [value, setValue] = useState(firstChildValue);
+
+  useEffect(() => {
+    if (firstChildValue && onChange) {
+      onChange(firstChildValue);
+    }
+  }, [firstChildValue, onChange]);
 
   const handleChange = (selectedValue) => {
     setValue(selectedValue);
@@ -36,7 +43,7 @@ const HomeSelectForm = ({ label, id, children, onChange }) => {
         onChange={handleChange}
         suffixIcon={<DropdownArrow />}
       >
-        {React.Children.map(children, (child) => (
+        {childrenArray.map((child) => (
           <Option
             key={child.props.SelectOption}
             value={child.props.SelectOption}
