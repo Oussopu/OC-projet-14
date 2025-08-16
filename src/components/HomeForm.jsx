@@ -1,6 +1,7 @@
 import { useCallback, useId, useState } from "react";
+import { useDispatch } from "react-redux";
 import { states } from "../const/states.jsx";
-import { useEmployee } from "../context/EmployeeContext";
+import { addEmployee } from "../store/employeeSlice";
 import DatePickerInput from "./DatePickerInput";
 import HomeFieldSet from "./HomeFieldSet.jsx";
 import HomeInputForm from "./HomeInputForm";
@@ -9,7 +10,7 @@ import HomeSelectFormOption from "./HomeSelectFormOption.jsx";
 
 const HomeForm = ({ onEmployeeCreated }) => {
   const formId = useId();
-  const { addEmployee } = useEmployee();
+  const dispatch = useDispatch();
 
   const [formData, setFormData] = useState({
     firstName: "",
@@ -57,7 +58,13 @@ const HomeForm = ({ onEmployeeCreated }) => {
 
     setErrorMessageVisible(false);
 
-    addEmployee(formData);
+    const employeeData = {
+      ...formData,
+      dateOfBirth: new Date(dateOfBirth).toISOString(),
+      startDate: new Date(startDate).toISOString(),
+    };
+
+    dispatch(addEmployee(employeeData));
 
     if (onEmployeeCreated) {
       onEmployeeCreated();
@@ -95,6 +102,7 @@ const HomeForm = ({ onEmployeeCreated }) => {
           All fields are required.
         </div>
       )}
+
       <HomeInputForm
         htmlFor={"first-name"}
         type={"text"}
@@ -105,6 +113,7 @@ const HomeForm = ({ onEmployeeCreated }) => {
           setFormData((prev) => ({ ...prev, firstName: e.target.value }))
         }
       />
+
       <HomeInputForm
         htmlFor={"last-name"}
         type={"text"}
@@ -115,6 +124,7 @@ const HomeForm = ({ onEmployeeCreated }) => {
           setFormData((prev) => ({ ...prev, lastName: e.target.value }))
         }
       />
+
       <DatePickerInput
         label={"Date of Birth"}
         id={"date-of-birth"}
@@ -122,6 +132,7 @@ const HomeForm = ({ onEmployeeCreated }) => {
           setFormData((prev) => ({ ...prev, dateOfBirth: date }))
         }
       />
+
       <DatePickerInput
         label={"Start Date"}
         id={"start-date"}
@@ -129,6 +140,7 @@ const HomeForm = ({ onEmployeeCreated }) => {
           setFormData((prev) => ({ ...prev, startDate: date }))
         }
       />
+
       <HomeFieldSet
         street={formData.street}
         setStreet={(value) =>
@@ -143,6 +155,7 @@ const HomeForm = ({ onEmployeeCreated }) => {
           setFormData((prev) => ({ ...prev, zipCode: value }))
         }
       />
+
       <HomeSelectForm
         htmlFor={"department"}
         id={"department"}
@@ -155,6 +168,7 @@ const HomeForm = ({ onEmployeeCreated }) => {
         <HomeSelectFormOption SelectOption="Human Resources" />
         <HomeSelectFormOption SelectOption="Legal" />
       </HomeSelectForm>
+
       <button type="submit" style={{ margin: "20px" }}>
         Save
       </button>

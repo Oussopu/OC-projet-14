@@ -1,8 +1,8 @@
 import { AllCommunityModule, ModuleRegistry } from "ag-grid-community";
 import { AgGridReact } from "ag-grid-react";
 import { useMemo, useRef, useState } from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { useEmployee } from "../context/EmployeeContext";
 import CustomHeaderComponent from "./CustomHeaderComponent.jsx";
 import "../../app.css";
 
@@ -11,7 +11,7 @@ ModuleRegistry.registerModules([AllCommunityModule]);
 const EmployeeListMainContainer = () => {
   const gridRef = useRef();
   const [searchText, setSearchText] = useState("");
-  const { employees } = useEmployee();
+  const employees = useSelector((state) => state.employees.employees);
 
   const onGridReady = (params) => {
     gridRef.current = params.api;
